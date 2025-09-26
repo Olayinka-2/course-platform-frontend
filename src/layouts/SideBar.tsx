@@ -54,12 +54,12 @@ const SideBar = () => {
 
   return (
     <div className='pt-7 px-6 pb-3 flex flex-col gap-5'>
-      <div className='*:'>
+      <div className='flex justify-between items-center'>
         <div className='flex items-center gap-2 mx-auto'>
         <img src="/assets/logo.png" alt="logo" className='w-5 h-6'/>
         <h1 className='font-bold text-lg'>Courses</h1>
         </div>
-        <button>
+        <button className='lg:hidden'>
           <FaBars />
         </button>
       </div>
