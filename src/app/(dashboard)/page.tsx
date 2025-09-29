@@ -1,14 +1,12 @@
 import React from "react";
-import Header from "@/components/dashbaord/header";
-import HeroSection from "@/components/dashbaord/heroSection";
-import Calender from "@/components/dashbaord/calender";
+import Header from "@/components/dashboard/header";
+import HeroSection from "@/components/dashboard/heroSection";
 
 const Dashboard = () => {
   return (
     <div>
       <Header />
       <HeroSection />
-      <Calender />
     </div>
   );
 };

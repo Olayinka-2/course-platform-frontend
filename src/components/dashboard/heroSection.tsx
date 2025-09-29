@@ -3,7 +3,7 @@ import Calender from "./calender";
 
 const HeroSection = () => {
   return (
-    <div className="mt-3">
+    <div className="mt-3 flex gap-4">
       <div className="w-[43rem]">
         <div className="h-[200px]">
           <img
@@ -135,8 +135,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      <Calender  />
 
-  
+
     </div>
   );
 };
