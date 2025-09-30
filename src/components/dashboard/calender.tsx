@@ -1,93 +1,105 @@
 "use client";
 
 import React, { useState } from "react";
-import {FaArrowRight, FaArrowLeft} from "react-icons/fa"
+import { FaArrowRight, FaArrowLeft, FaPlus } from "react-icons/fa";
 import {
-  format,         // format a date → "Sep 27, 2025"
-  startOfMonth,   // first day of the current month
-  endOfMonth,     // last day of the current month
-  startOfWeek,    // start of the week (Sunday/Monday)
-  endOfWeek,      // end of the week
-  addMonths,      // move to next/previous month
+  format,
+  startOfMonth,
+  endOfMonth,
+  startOfWeek,
+  endOfWeek,
+  addMonths,
   subMonths,
-  addDays,        // add days (for looping weeks)
-  isSameMonth,    // check if two dates are in the same month
-  isToday,
-  Month        // check if a date is today
+  addDays,
 } from "date-fns";
+import CalenderSchedule from "./calenderSchedule";
 
+const Calendar = () => {
+  const today = new Date();
+  const [currentMonth, setCurrentMonth] = useState(today);
 
-const calender = () => {
-
-  const [currentMonth, setCurrentMonth] = useState(new Date());
-
-  const monthName = ['January', 'Febuary', "March", "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-  const nextMonth = () => {
-    setCurrentMonth(addMonths(currentMonth, 1));
-  };
-
-  const prevMonth = () => {
-    setCurrentMonth(subMonths(currentMonth, 1));
-  };
+  const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
+  const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
 
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(monthStart);
-  const startWeek = startOfWeek(monthStart, {weekStartsOn: 0});
-  const endWeek = endOfWeek(monthStart, {weekStartsOn: 0});
+  const startWeek = startOfWeek(monthStart, { weekStartsOn: 0 });
+  const endWeek = endOfWeek(monthStart, { weekStartsOn: 0 });
 
-  const rows: React.ReactNode[] = [];   // each row = array of 7 day cells
+  const rows: React.ReactNode[] = [];
   let day: Date = startWeek;
-  let count = 0;
+  let count = 3;
 
   while (day <= monthEnd) {
-    count++;
-    let days: React.ReactNode[] = [];
+    const days: React.ReactNode[] = [];
 
     for (let i = 0; i < 7; i++) {
+      const isOtherMonth = format(day, "M") !== format(currentMonth, "M");
+      const isToday = format(today, "yyyy-MM-dd") === format(day, "yyyy-MM-dd");
+
       days.push(
-        <div key={day.toString()} className={`text-center p-2 ${format(day, "M") !== format(currentMonth, "M") ? 'text-gray-400' : ''} ${format(currentMonth, "d") == format(day, "d") ? 'bg-indigo-500 rounded-full': ''} text-sm`}>
+        <div
+          key={day.toString()}
+          className={`text-center p-2 text-sm
+            ${isOtherMonth ? "text-gray-400" : ""}
+            ${isToday ? "bg-indigo-500 text-white rounded-full" : ""}
+          `}
+        >
           {format(day, "d")}
         </div>
       );
+
       day = addDays(day, 1);
     }
-    if(count == 3 ) {
+    count--;
+    if(count == 0) {
       break;
     }
 
-
-    rows.push(<div key={day.toString()} className="flex justify-between items-center mb-1 gap-2">
-    {days}
-  </div>);
+    rows.push(
+      <div
+        key={day.toString()}
+        className="flex justify-between items-center mb-1 gap-2"
+      >
+        {days}
+      </div>
+    );
   }
 
-
+  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
-    <div className="rounded-2xl p-5 flex-1 bg-white self-start">
-      <div className="flex justify-between items-center font-semibold mb-4">
-        <FaArrowLeft />
-        <p>{format(currentMonth, "MMMM yyyy")}</p>
-        <FaArrowRight />
+    <div className="flex-1">
+      {/* Calendar */}
+      <div className="rounded-2xl p-5 bg-white self-start">
+        {/* Header */}
+        <div className="flex justify-between items-center font-semibold mb-4">
+          <FaArrowLeft onClick={prevMonth} className="cursor-pointer" />
+          <p>{format(currentMonth, "MMMM yyyy")}</p>
+          <FaArrowRight onClick={nextMonth} className="cursor-pointer" />
+        </div>
+
+        <div className="flex justify-between text-xs font-bold mb-5">
+          {daysOfWeek.map((day) => (
+            <p key={day}>{day}</p>
+          ))}
+        </div>
+
+        {rows}
       </div>
 
-    <div className="" >
-      <div className="flex justify-between items-center text-xs font-bold mb-5">
-        <p>Sun</p>
-        <p>Mon</p>
-        <p>Tue</p>
-        <p>Wed</p>
-        <p>Thurs</p>
-        <p>Fri</p>
-        <p>Sat</p>
+      {/* Schedule Section */}
+      <div className="mt-5 bg-white p-5 rounded-2xl">
+        <div className="flex items-center justify-between">
+          <p className="font-semibold text-sm">Schedule</p>
+          <FaPlus className="p-1 bg-indigo-500 rounded-full text-white text-2xl cursor-pointer" />
+        </div>
+        <div>
+          <CalenderSchedule />
+        </div>
       </div>
-      {
-        rows
-      }
     </div>
-    </div>
-  )
-}
+  );
+};
 
-export default calender
+export default Calendar;

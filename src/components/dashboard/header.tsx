@@ -6,7 +6,7 @@ const Header:React.FC = () => {
     <div className='bg-white flex items-center justify-between p-5 rounded-lg'>
       <div>
         <p className='bold text-2xl'>Welcome back, Peter</p>
-        <p className='text-xs font-light text-gray-300'>Let's boots your knowledge today and learn a new thing</p>
+        <p className='text-xs font-light text-gray-400'>Let's boots your knowledge today and learn a new thing</p>
       </div>
       <div className='flex items-center gap-6'>
         <FaSearch className='w-5 h-5 cursor-pointer font-light' />
