@@ -18,13 +18,13 @@ const events = [
   {
     id: "1",
     title: "Morning Jog",
-    start: new Date(2025, 8, 29, 6, 30), // Sept 29, 2025 06:30
+    start: new Date(2025, 10, 6, 6, 30),
     end: new Date(2025, 8, 29, 7, 30),
   },
   {
     id: "2",
     title: "Team Standup",
-    start: new Date(2025, 8, 29, 9, 0), // 09:00
+    start: new Date(2025, 10, 6, 9, 0), // 09:00
     end: new Date(2025, 8, 29, 9, 30),
   },
   {
@@ -54,38 +54,33 @@ const CalenderSchedule = () => {
     hours.push(addHours(start, i));
   }
 
-
   return (
     <div className="relative rounded-lg h-auto overflow-y-auto">
       {hours.map((hour) => {
-        const event = events.find((item) => {
-          return (
+        const event = events.find(
+          (item) =>
             item.start.getHours() === hour.getHours() &&
             item.start.getDate() === hour.getDate()
-          );
-        });
+        );
+
         return (
-          <>
-            <div
-              className="flex items-center justify-start gap-3 p-2"
-              key={hour.toISOString()}
-            >
-              <p className="self-start text-gray-500 text-xs">
-                {format(hour, "h:mm a")}
-              </p>
-              <div className="flex-1 h-20 bg-violet-200 flex rounded-lg overflow-hidden">
-                {event ? (
-                  <p className="justify-self-start text-xs w-full h-full p-2">
-                    {event.title}
-                  </p>
-                ) : (
-                  <p className="flex-1 flex justify-center items-center bg-gray-100 text-indigo-500 font-bold w-full h-full">
-                    +
-                  </p>
-                )}
-              </div>
+          <div
+            className="flex items-center justify-start gap-2 p-1.5"
+            key={hour.toISOString()}
+          >
+            <p className="self-start text-gray-500 text-[11px] w-[50px]">
+              {format(hour, "h:mm a")}
+            </p>
+            <div className="flex-1 h-14 bg-violet-200 flex rounded-md overflow-hidden">
+              {event ? (
+                <p className="text-[11px] w-full h-full p-2">{event.title}</p>
+              ) : (
+                <p className="flex-1 flex justify-center items-center bg-gray-100 text-indigo-500 font-bold">
+                  +
+                </p>
+              )}
             </div>
-          </>
+          </div>
         );
       })}
     </div>

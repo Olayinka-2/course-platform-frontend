@@ -16,7 +16,7 @@ interface sidebarSection {
 const SidebarIcon:React.FC<sidebarIcon> = ({icon: Icon, label, path}) => {
   return (
     <>
-          <div className='flex gap-2 items-center px-6 py-2.5 hover:bg-gray-200 hover:text-indigo-500 rounded-md my-1 font-medium text-gray-500 cursor-pointer'>
+          <div className='flex gap-2 items-center px-6 py-2 hover:bg-gray-200 hover:text-indigo-500 rounded-md my-1 font-medium text-gray-500 cursor-pointer'>
             <Icon className='w-5 h-5'/>
             <p>{label}</p>
           </div>
@@ -53,7 +53,7 @@ const SideBar = () => {
 
 
   return (
-    <div className='pt-7 px-6 pb-3 flex flex-col gap-5'>
+    <div className='px-6 flex flex-col justify-evenly lg:h-[calc(100vh)]'>
       <div className='flex justify-between items-center'>
         <div className='flex items-center gap-2 mx-auto'>
         <img src="/assets/logo.png" alt="logo" className='w-5 h-6'/>
