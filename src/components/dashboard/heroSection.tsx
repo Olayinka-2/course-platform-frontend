@@ -6,8 +6,11 @@ interface HeroHeight {
 }
 
 const HeroSection: React.FC<HeroHeight> = ({ availableHeight }) => {
+
+   availableHeight = availableHeight - 35;
+
   return (
-    <div className="mt-3 flex gap-4" style={{ height: availableHeight }}>
+    <div className="mt-3 flex gap-4 overflow-hidden" style={{ height: availableHeight }}>
       <div className="w-[43rem] h-full flex flex-col gap-3">
         <div className="h-[150px]">
           <img
@@ -22,14 +25,14 @@ const HeroSection: React.FC<HeroHeight> = ({ availableHeight }) => {
             <p className="font-semibold">My Course</p>
             <p className="font-medium">See all</p>
           </div>
-          <div className="flex gap-2">
-            <div className="bg-white p-3 rounded-md flex flex-col gap-2 flex-1">
+          <div className="flex gap-2 mt-2">
+            <div className="bg-white p-5 rounded-md flex flex-col gap-2 flex-1">
               <img
                 src="/assets/logos_envato.png"
                 alt="envato logo"
-                className="self-start h-[16px] w-auto"
+                className="self-start h-[18px] w-auto"
               />
-              <p className="font-medium text-xs w-5/6">
+              <p className="font-medium text-xs w-5/6 text-nowrap overflow-ellipsis">
                 Envato Mastery: Build a passive income from...
               </p>
               <div className="text-[10px]">
@@ -41,13 +44,13 @@ const HeroSection: React.FC<HeroHeight> = ({ availableHeight }) => {
               </div>
             </div>
 
-            <div className="bg-white p-3 rounded-md flex flex-col gap-2 flex-1">
+            <div className="bg-white p-5 rounded-md flex flex-col gap-2 flex-1">
               <img
                 src="/assets/logos_google.png"
                 alt="google logo"
-                className="self-start h-[16px] w-auto"
+                className="self-start h-[18px] w-auto"
               />
-              <p className="font-medium text-xs w-5/6 capitalize">
+              <p className="font-medium text-xs w-5/6 text-nowrap overflow-ellipsis capitalize">
                 Mastering git and vercel app become pro...
               </p>
               <div className="text-[10px]">
@@ -61,11 +64,11 @@ const HeroSection: React.FC<HeroHeight> = ({ availableHeight }) => {
           </div>
         </div>
 
-        <div className="flex-1 flex flex-col">
-          <div className="flex items-center justify-between text-xs my-1">
+          <div className="flex items-center justify-between text-xs my-2">
             <p className="font-semibold">Today's Task</p>
             <p className="font-medium">See all</p>
           </div>
+        <div className="flex-1 flex flex-col overflow-y-auto scrollbar-hide">
 
           <div className="flex flex-col gap-3 pt-2">
             {[
